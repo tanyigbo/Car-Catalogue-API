@@ -23,6 +23,75 @@ public class Car {
     @Column
     private Integer view_count = 0;
 
+    @Column
+    @ManyToOne
+    @JoinColumn(name = "manufacture_id")
+    private Manufacture manufacture;
+
     public Car() {
+    }
+
+    public Car(Long id, String name, String make, String model, Manufacture manufacture) {
+        this.id = id;
+        this.name = name;
+        this.make = make;
+        this.model = model;
+        this.manufacture = manufacture;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Integer getView_count() {
+        return view_count;
+    }
+
+    public void setView_count(Integer view_count) {
+        this.view_count = view_count;
+    }
+
+    public Manufacture getManufacture() {
+        return manufacture;
+    }
+
+    public void setManufacture(Manufacture manufacture) {
+        this.manufacture = manufacture;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", view_count=" + view_count +
+                ", manufacture=" + manufacture +
+                '}';
     }
 }
