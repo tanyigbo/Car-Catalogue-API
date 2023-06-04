@@ -1,6 +1,10 @@
 package com.example.carapi.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "manufactures")
@@ -17,6 +21,10 @@ public class Manufacture {
     @Column(nullable = false)
     private String country;
 
+    @Column
+    @OneToMany(mappedBy = "manufacture")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Car> carList;
 
     public Manufacture() {
     }
@@ -46,12 +54,21 @@ public class Manufacture {
         this.country = country;
     }
 
+    public List<Car> getCarList() {
+        return carList;
+    }
+
+    public void setCarList(List<Car> cars) {
+        this.carList = cars;
+    }
+
     @Override
     public String toString() {
         return "Manufacture{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
+                ", cars=" + carList +
                 '}';
     }
 }
