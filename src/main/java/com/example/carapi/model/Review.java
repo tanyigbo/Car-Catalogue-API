@@ -1,6 +1,7 @@
 package com.example.carapi.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "reviews")
@@ -27,6 +28,10 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
+
+    @Column
+    @OneToMany(mappedBy = "review")
+    private List<ReviewImage> reviewImageList;
 
     public Review() {
     }
@@ -82,6 +87,14 @@ public class Review {
         this.car = car;
     }
 
+    public List<ReviewImage> getReviewImageList() {
+        return reviewImageList;
+    }
+
+    public void setReviewImageList(List<ReviewImage> reviewImageList) {
+        this.reviewImageList = reviewImageList;
+    }
+
     @Override
     public String toString() {
         return "Review{" +
@@ -91,6 +104,8 @@ public class Review {
                 ", reviewerName='" + reviewerName + '\'' +
                 ", viewCount=" + viewCount +
                 ", car=" + car +
+                ", reviewImageList=" + reviewImageList +
                 '}';
     }
 }
+
