@@ -33,6 +33,10 @@ public class Car {
     @OneToMany(mappedBy = "car")
     private List<Image> imageList;
 
+    @Column
+    @OneToMany (mappedBy = "car")
+    private List<Review> reviewList;
+
     public Car() {
     }
 
@@ -96,6 +100,14 @@ public class Car {
         this.imageList = imageList;
     }
 
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -106,6 +118,7 @@ public class Car {
                 ", view_count=" + view_count +
                 ", manufacture=" + manufacture +
                 ", imageList=" + imageList +
+                ", reviewList=" + reviewList +
                 '}';
     }
 }
