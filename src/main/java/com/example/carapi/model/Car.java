@@ -1,6 +1,7 @@
 package com.example.carapi.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cars")
@@ -27,6 +28,10 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "manufacture_id")
     private Manufacture manufacture;
+
+    @Column
+    @OneToMany(mappedBy = "car")
+    private List<Image> imageList;
 
     public Car() {
     }
