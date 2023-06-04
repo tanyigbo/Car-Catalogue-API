@@ -88,6 +88,14 @@ public class Car {
         this.manufacture = manufacture;
     }
 
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -97,6 +105,7 @@ public class Car {
                 ", model='" + model + '\'' +
                 ", view_count=" + view_count +
                 ", manufacture=" + manufacture +
+                ", imageList=" + imageList +
                 '}';
     }
 }
