@@ -22,7 +22,7 @@ public class Manufacture {
     private String country;
 
     @Column
-    @OneToMany(mappedBy = "manufacture")
+    @OneToMany(mappedBy = "manufacture", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Car> carList;
 
@@ -63,13 +63,16 @@ public class Manufacture {
         this.carList = carList;
     }
 
+    public void addToCarList(Car car){
+        this.carList.add(car);
+    }
+
     @Override
     public String toString() {
         return "Manufacture{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
-                ", carList=" + carList +
                 '}';
     }
 }

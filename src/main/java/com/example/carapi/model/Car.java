@@ -90,7 +90,6 @@ public class Car {
                 ", model='" + model + '\'' +
                 ", view_count=" + view_count +
                 ", manufacture=" + manufacture +
-                ", imageList=" + imageList +
                 ", reviewList=" + reviewList +
                 '}';
     }

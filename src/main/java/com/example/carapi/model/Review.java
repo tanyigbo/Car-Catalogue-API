@@ -1,5 +1,8 @@
 package com.example.carapi.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "car_id")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Car car;
 
     @Column
@@ -35,11 +39,12 @@ public class Review {
     public Review() {
     }
 
-    public Review(Long id, String title, String reviewText, String reviewerName) {
+    public Review(Long id, String title, String reviewText, String reviewerName,Car car) {
         this.id = id;
         this.title = title;
         this.reviewText = reviewText;
         this.reviewerName = reviewerName;
+        this.car = car;
     }
 
     public Long getId() {
@@ -102,8 +107,6 @@ public class Review {
                 ", reviewText='" + reviewText + '\'' +
                 ", reviewerName='" + reviewerName + '\'' +
                 ", viewCount=" + viewCount +
-                ", car=" + car +
-                ", reviewImageList=" + reviewImageList +
                 '}';
     }
 }
