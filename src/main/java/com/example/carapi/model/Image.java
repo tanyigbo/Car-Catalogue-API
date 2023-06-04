@@ -15,7 +15,6 @@ public class Image {
     @Column
     private String imageAddress;
 
-    @Column
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;

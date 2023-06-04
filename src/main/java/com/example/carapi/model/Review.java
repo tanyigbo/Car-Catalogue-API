@@ -24,7 +24,6 @@ public class Review {
     @Column
     private Integer viewCount = 0;
 
-    @Column
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;

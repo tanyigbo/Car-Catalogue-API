@@ -24,7 +24,6 @@ public class Car {
     @Column
     private Integer view_count = 0;
 
-    @Column
     @ManyToOne
     @JoinColumn(name = "manufacture_id")
     private Manufacture manufacture;

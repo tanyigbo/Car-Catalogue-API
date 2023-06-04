@@ -14,7 +14,6 @@ public class ReviewImage {
     @Column
     private String imageAddress;
 
-    @Column
     @ManyToOne
     @JoinColumn(name = "review_id")
     private Review review;
