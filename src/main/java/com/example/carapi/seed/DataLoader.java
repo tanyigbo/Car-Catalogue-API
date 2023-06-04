@@ -3,6 +3,7 @@ package com.example.carapi.seed;
 import com.example.carapi.exception.InformationNotFound;
 import com.example.carapi.model.Car;
 import com.example.carapi.model.Manufacture;
+import com.example.carapi.model.Review;
 import com.example.carapi.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -34,6 +35,7 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         loadManufactureData();
         loadCarData();
+        loadReviewData();
     }
 
     private Manufacture findManufactureByID(Long id) {
@@ -58,23 +60,39 @@ public class DataLoader implements CommandLineRunner {
 
     private void loadCarData() {
         if (carRepository.count() == 0) {
-            Manufacture audi = findManufactureByID(1L);
-            Manufacture bmw = findManufactureByID(2L);
-            Manufacture tesla = findManufactureByID(3L);
-            Manufacture hyundai = findManufactureByID(4L);
-
+            List<Manufacture> manufactures = manufactureRepository.findAll();
             List<Car> cars = Arrays.asList(
-                    new Car(1L, "e-tron GT RS", audi),
-                    new Car(2L, "Q4 e-tron", audi),
-                    new Car(3L, "i4 M50", bmw),
-                    new Car(4L, "iX", bmw),
-                    new Car(5L, "Model S", tesla),
-                    new Car(6L, "Model X", tesla),
-                    new Car(7L, "Model 3", tesla),
-                    new Car(8L, "Ioniq 5", hyundai),
-                    new Car(9L, "Ioniq 6", hyundai)
+                    new Car(1L, "e-tron GT RS", manufactures.get(0)),
+                    new Car(2L, "Q4 e-tron", manufactures.get(0)),
+                    new Car(3L, "i4 M50", manufactures.get(1)),
+                    new Car(4L, "iX M60", manufactures.get(1)),
+                    new Car(5L, "Model S", manufactures.get(2)),
+                    new Car(6L, "Model X", manufactures.get(2)),
+                    new Car(7L, "Model 3", manufactures.get(2)),
+                    new Car(8L, "Ioniq 5", manufactures.get(3)),
+                    new Car(9L, "Ioniq 6", manufactures.get(3))
             );
             carRepository.saveAll(cars);
+        }
+    }
+
+    private void loadReviewData(){
+        if(reviewRepository.count() == 0){
+            List<Car> cars = carRepository.findAll();
+            List<Review> reviews = Arrays.asList(
+              new Review(1L,"Title 1","Review Text 1", "Reviewer 1",cars.get(0)),
+              new Review(2L,"Title 2","Review Text 2", "Reviewer 2",cars.get(1)),
+              new Review(3L,"Title 3","Review Text 3", "Reviewer 3",cars.get(2)),
+              new Review(4L,"Title 4","Review Text 4", "Reviewer 4",cars.get(4)),
+              new Review(5L,"Title 5","Review Text 5", "Reviewer 5",cars.get(4)),
+              new Review(6L,"Title 6","Review Text 6", "Reviewer 6",cars.get(5)),
+              new Review(7L,"Title 7","Review Text 7", "Reviewer 7",cars.get(6)),
+              new Review(8L,"Title 8","Review Text 8", "Reviewer 8",cars.get(6)),
+              new Review(9L,"Title 9","Review Text 9", "Reviewer 9",cars.get(6)),
+              new Review(10L,"Title 10","Review Text 10", "Reviewer 10",cars.get(6)),
+              new Review(11L,"Title 11","Review Text 11", "Reviewer 11",cars.get(7))
+            );
+            reviewRepository.saveAll(reviews);
         }
     }
 }
