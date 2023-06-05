@@ -33,8 +33,8 @@ public class Definitions {
         response = request.get(BASE_URL + port + "/api/manufacturers");
     }
 
-    @Then("A list of manufacture is returned")
-    public void aListOfManufactureIsReturned() {
+    @Then("A list of manufacturers is returned")
+    public void aListOfManufacturersIsReturned() {
         Assert.assertEquals(200, response.getStatusCode());
         List<Map<String, String>> manufacturers = response.jsonPath().get("data");
         Assert.assertTrue(manufacturers.size() > 0);
@@ -50,5 +50,19 @@ public class Definitions {
         Assert.assertEquals(302, response.getStatusCode());
         List<Map<String, String>> cars = response.jsonPath().get("data");
         Assert.assertTrue(cars.size() > 0);
+    }
+
+    @When("User requests a car by id")
+    public void userRequestsACarById() {
+        response = request.get(BASE_URL + port + "/api/cars/1");
+        response.prettyPrint();
+    }
+
+    @Then("Requested car is returned")
+    public void requestedCarIsReturned() {
+        Assert.assertEquals(302, response.getStatusCode());
+        Map<String, Object> car = response.jsonPath().get("data");
+        Assert.assertEquals(1,car.get("id"));
+        Assert.assertEquals("e-tron GT", car.get("model"));
     }
 }
