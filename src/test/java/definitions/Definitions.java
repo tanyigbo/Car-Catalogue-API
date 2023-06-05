@@ -5,6 +5,7 @@ import com.example.carapi.model.Manufacturer;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.it.Ma;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -36,6 +37,18 @@ public class Definitions {
     public void aListOfManufactureIsReturned() {
         Assert.assertEquals(200, response.getStatusCode());
         List<Map<String, String>> manufacturers = response.jsonPath().get("data");
-        Assert.assertTrue(manufacturers.size()>0);
+        Assert.assertTrue(manufacturers.size() > 0);
+    }
+
+    @When("User requests a list of all cars")
+    public void userRequestsAListOfAllCars() {
+        response = request.get(BASE_URL + port + "/api/cars");
+    }
+
+    @Then("A list of all cars is returned")
+    public void aListOfAllCarsIsReturned() {
+        Assert.assertEquals(302, response.getStatusCode());
+        List<Map<String, String>> cars = response.jsonPath().get("data");
+        Assert.assertTrue(cars.size() > 0);
     }
 }
