@@ -1,7 +1,7 @@
 package com.example.carapi.model;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,9 +21,9 @@ public class Manufacturer {
     @Column(nullable = false)
     private String country;
 
+    @JsonIgnore
     @Column
-    @OneToMany(mappedBy = "manufacturer", orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "manufacturer")
     private List<Car> carList;
 
     public Manufacturer() {
@@ -69,10 +69,11 @@ public class Manufacturer {
 
     @Override
     public String toString() {
-        return "Manufacture{" +
+        return "Manufacturer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", country='" + country + '\'' +
+                ", carList=" + carList +
                 '}';
     }
 }

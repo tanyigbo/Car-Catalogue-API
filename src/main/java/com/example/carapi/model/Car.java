@@ -1,5 +1,7 @@
 package com.example.carapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,12 +22,15 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
+    @JsonIgnore
     private Manufacturer manufacturer;
 
+    @JsonIgnore
     @Column
     @OneToMany(mappedBy = "car")
     private List<Image> imageList;
 
+    @JsonIgnore
     @Column
     @OneToMany (mappedBy = "car")
     private List<Review> reviewList;
@@ -90,6 +95,7 @@ public class Car {
                 ", model='" + model + '\'' +
                 ", view_count=" + view_count +
                 ", manufacturer=" + manufacturer +
+                ", imageList=" + imageList +
                 ", reviewList=" + reviewList +
                 '}';
     }
