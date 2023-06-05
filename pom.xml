@@ -61,7 +61,6 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
@@ -69,6 +68,7 @@
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>${cucumber.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
@@ -84,6 +84,7 @@
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-spring</artifactId>
 			<version>${cucumber.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
