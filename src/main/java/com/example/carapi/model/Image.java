@@ -22,9 +22,10 @@ public class Image {
     public Image() {
     }
 
-    public Image(Long id, String imageAddress) {
+    public Image(Long id, String imageAddress, Car car) {
         this.id = id;
         this.imageAddress = imageAddress;
+        this.car = car;
     }
 
     public Long getId() {
