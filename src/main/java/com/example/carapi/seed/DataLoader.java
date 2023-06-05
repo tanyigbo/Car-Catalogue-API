@@ -52,7 +52,7 @@ public class DataLoader implements CommandLineRunner {
         if (carRepository.count() == 0) {
             List<Manufacturer> manufacturers = manufacturerRepository.findAll();
             List<Car> cars = Arrays.asList(
-                    new Car(1L, "e-tron GT RS", manufacturers.get(0)),
+                    new Car(1L, "e-tron GT", manufacturers.get(0)),
                     new Car(2L, "Q4 e-tron", manufacturers.get(0)),
                     new Car(3L, "i4 M50", manufacturers.get(1)),
                     new Car(4L, "iX M60", manufacturers.get(1)),
