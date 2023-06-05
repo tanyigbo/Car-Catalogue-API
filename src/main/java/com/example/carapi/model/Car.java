@@ -19,8 +19,8 @@ public class Car {
     private Integer view_count = 0;
 
     @ManyToOne
-    @JoinColumn(name = "manufacture_id")
-    private Manufacture manufacture;
+    @JoinColumn(name = "manufacturer_id")
+    private Manufacturer manufacturer;
 
     @Column
     @OneToMany(mappedBy = "car")
@@ -33,10 +33,10 @@ public class Car {
     public Car() {
     }
 
-    public Car(Long id, String model, Manufacture manufacture) {
+    public Car(Long id, String model, Manufacturer manufacturer) {
         this.id = id;
         this.model = model;
-        this.manufacture = manufacture;
+        this.manufacturer = manufacturer;
     }
 
     public Long getId() {
@@ -59,12 +59,12 @@ public class Car {
         this.view_count = view_count;
     }
 
-    public Manufacture getManufacture() {
-        return manufacture;
+    public Manufacturer getManufacture() {
+        return manufacturer;
     }
 
-    public void setManufacture(Manufacture manufacture) {
-        this.manufacture = manufacture;
+    public void setManufacture(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public List<Image> getImageList() {
@@ -89,7 +89,7 @@ public class Car {
                 "id=" + id +
                 ", model='" + model + '\'' +
                 ", view_count=" + view_count +
-                ", manufacture=" + manufacture +
+                ", manufacturer=" + manufacturer +
                 ", reviewList=" + reviewList +
                 '}';
     }

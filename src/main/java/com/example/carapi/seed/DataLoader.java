@@ -14,15 +14,15 @@ public class DataLoader implements CommandLineRunner {
 
     private final CarRepository carRepository;
     private final ImageRepository imageRepository;
-    private final ManufactureRepository manufactureRepository;
+    private final ManufacturerRepository manufacturerRepository;
     private final ReviewRepository reviewRepository;
     private final ReviewImageRepository reviewImageRepository;
 
     @Autowired
-    public DataLoader(CarRepository carRepository, ImageRepository imageRepository, ManufactureRepository manufactureRepository, ReviewRepository reviewRepository, ReviewImageRepository reviewImageRepository) {
+    public DataLoader(CarRepository carRepository, ImageRepository imageRepository, ManufacturerRepository manufacturerRepository, ReviewRepository reviewRepository, ReviewImageRepository reviewImageRepository) {
         this.carRepository = carRepository;
         this.imageRepository = imageRepository;
-        this.manufactureRepository = manufactureRepository;
+        this.manufacturerRepository = manufacturerRepository;
         this.reviewRepository = reviewRepository;
         this.reviewImageRepository = reviewImageRepository;
     }
@@ -37,28 +37,28 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadManufactureData() {
-        if (manufactureRepository.count() == 0) {
-            List<Manufacture> manufactures = Arrays.asList(
-                    new Manufacture(1L, "Audi", "Germany"),
-                    new Manufacture(2L, "BMW", "Germany"),
-                    new Manufacture(3L, "Hyundai", "South Korea"),
-                    new Manufacture(4L, "Tesla", "United States")
+        if (manufacturerRepository.count() == 0) {
+            List<Manufacturer> manufacturers = Arrays.asList(
+                    new Manufacturer(1L, "Audi", "Germany"),
+                    new Manufacturer(2L, "BMW", "Germany"),
+                    new Manufacturer(3L, "Hyundai", "South Korea"),
+                    new Manufacturer(4L, "Tesla", "United States")
             );
-            manufactureRepository.saveAll(manufactures);
+            manufacturerRepository.saveAll(manufacturers);
         }
     }
 
     private void loadCarData() {
         if (carRepository.count() == 0) {
-            List<Manufacture> manufactures = manufactureRepository.findAll();
+            List<Manufacturer> manufacturers = manufacturerRepository.findAll();
             List<Car> cars = Arrays.asList(
-                    new Car(1L, "e-tron GT RS", manufactures.get(0)),
-                    new Car(2L, "Q4 e-tron", manufactures.get(0)),
-                    new Car(3L, "i4 M50", manufactures.get(1)),
-                    new Car(4L, "iX M60", manufactures.get(1)),
-                    new Car(5L, "Model S", manufactures.get(3)),
-                    new Car(6L, "Model 3", manufactures.get(3)),
-                    new Car(7L, "Ioniq 5", manufactures.get(2))
+                    new Car(1L, "e-tron GT RS", manufacturers.get(0)),
+                    new Car(2L, "Q4 e-tron", manufacturers.get(0)),
+                    new Car(3L, "i4 M50", manufacturers.get(1)),
+                    new Car(4L, "iX M60", manufacturers.get(1)),
+                    new Car(5L, "Model S", manufacturers.get(3)),
+                    new Car(6L, "Model 3", manufacturers.get(3)),
+                    new Car(7L, "Ioniq 5", manufacturers.get(2))
             );
             carRepository.saveAll(cars);
         }

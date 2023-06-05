@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "manufactures")
-public class Manufacture {
+@Table(name = "manufacturers")
+public class Manufacturer {
 
     @Id
     @Column
@@ -22,14 +22,14 @@ public class Manufacture {
     private String country;
 
     @Column
-    @OneToMany(mappedBy = "manufacture", orphanRemoval = true)
+    @OneToMany(mappedBy = "manufacturer", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Car> carList;
 
-    public Manufacture() {
+    public Manufacturer() {
     }
 
-    public Manufacture(Long id, String name, String country) {
+    public Manufacturer(Long id, String name, String country) {
         this.id = id;
         this.name = name;
         this.country = country;
