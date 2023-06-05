@@ -1,4 +1,5 @@
 Feature: TBD
 
   Scenario: User views cars by manufacture
-    Given A list of manufacture
+    When User requests a list of all manufacturers
+    Then A list of manufacture is returned
