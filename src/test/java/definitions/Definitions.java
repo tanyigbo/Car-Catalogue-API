@@ -1,11 +1,8 @@
 package definitions;
 
 import com.example.carapi.CarApiApplication;
-import com.example.carapi.model.Manufacturer;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.it.Ma;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -13,6 +10,7 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+
 
 import java.util.List;
 import java.util.Map;
@@ -40,6 +38,21 @@ public class Definitions {
         Assert.assertTrue(manufacturers.size() > 0);
     }
 
+    @When("User requests a manufacturer by id")
+    public void userRequestsAManufacturerById() {
+        response = request.get(BASE_URL + port + "/api/manufacturer/2");
+    }
+
+    @Then("Requested manufacturer is returned")
+    public void requestedManufacturerIsReturned() {
+        Assert.assertEquals(302, response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        Assert.assertEquals("success", message);
+        Map<String, Object> manufacturer = response.jsonPath().get("data");
+        Assert.assertEquals(2, manufacturer.get("id"));
+        Assert.assertEquals("BMW",manufacturer.get("name"));
+        Assert.assertEquals("Germany",manufacturer.get("country"));
+    }
     @When("User requests a list of all cars")
     public void userRequestsAListOfAllCars() {
         response = request.get(BASE_URL + port + "/api/cars");
@@ -55,14 +68,15 @@ public class Definitions {
     @When("User requests a car by id")
     public void userRequestsACarById() {
         response = request.get(BASE_URL + port + "/api/cars/1");
-        response.prettyPrint();
     }
 
     @Then("Requested car is returned")
     public void requestedCarIsReturned() {
         Assert.assertEquals(302, response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        Assert.assertEquals("success", message);
         Map<String, Object> car = response.jsonPath().get("data");
-        Assert.assertEquals(1,car.get("id"));
+        Assert.assertEquals(1, car.get("id"));
         Assert.assertEquals("e-tron GT", car.get("model"));
     }
 }
