@@ -10,43 +10,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
 public class CarController {
 
-    private static HashMap<String, Object> message;
     private final CarService carService;
+    private final ResponseController responseController;
 
     @Autowired
-    public CarController(CarService carService) {
+    public CarController(CarService carService, ResponseController responseController) {
         this.carService = carService;
+        this.responseController = responseController;
     }
 
     @GetMapping(path = "/cars")
     public ResponseEntity<?> getAllCars() {
-        message = new HashMap<>();
         List<Car> cars = carService.getAllCars();
-        message.put("message", "success");
-        message.put("data", cars);
-        return new ResponseEntity<>(message, HttpStatus.FOUND);
+        return responseController.successfulRequestResponse(cars,HttpStatus.FOUND);
     }
 
     @GetMapping(path = "/cars/{carId}")
     public ResponseEntity<?> getCarById(@PathVariable Long carId) {
-        message = new HashMap<>();
         try {
             Car car = carService.getCarById(carId);
-            message.put("message", "success");
-            message.put("data", car);
-            return new ResponseEntity<>(message, HttpStatus.FOUND);
+            return responseController.successfulRequestResponse(car,HttpStatus.FOUND);
         } catch (Exception e) {
-            message.put("message", "failure");
-            message.put("data", e.getMessage());
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            return responseController.failureRequestResponse(e.getMessage(),HttpStatus.NOT_FOUND);
         }
-
     }
 }
