@@ -10,6 +10,10 @@ Feature: TBD
     When User requests a manufacturer by id that does not exist
     Then Error message returned stating manufacture not found
 
+  Scenario: User views all cars by manufacturer
+    When User requests a list of all cars by manufacturer
+    Then A list of all cars by requested manufacturer is returned
+
   Scenario: User views all cars
     When User requests a list of all cars
     Then A list of all cars is returned

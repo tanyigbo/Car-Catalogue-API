@@ -40,7 +40,7 @@ public class Definitions {
 
     @When("User requests a manufacturer by id")
     public void userRequestsAManufacturerById() {
-        response = request.get(BASE_URL + port + "/api/manufacturer/2");
+        response = request.get(BASE_URL + port + "/api/manufacturers/2");
     }
 
     @Then("Requested manufacturer is returned")
@@ -56,21 +56,34 @@ public class Definitions {
 
     @When("User requests a manufacturer by id that does not exist")
     public void userRequestsAManufacturerByIdThatDoesNotExist() {
-        response = request.get(BASE_URL + port + "/api/manufacturer/10");
+        response = request.get(BASE_URL + port + "/api/manufacturers/10");
     }
 
     @Then("Error message returned stating manufacture not found")
     public void errorMessageReturnedStatingManufactureNotFound() {
-        Assert.assertEquals(404,response.getStatusCode());
+        Assert.assertEquals(404, response.getStatusCode());
         String message = response.jsonPath().get("message");
         String expected = "Manufacturer with ID 10 was not found.";
-        Assert.assertEquals(expected,message);
+        Assert.assertEquals(expected, message);
+    }
+
+    @When("User requests a list of all cars by manufacturer")
+    public void userRequestsAListOfAllCarsByManufacturer() {
+        response = request.get(BASE_URL + port + "/api/manufacturers/1/cars");
+        response.prettyPrint();
+    }
+
+    @Then("A list of all cars by requested manufacturer is returned")
+    public void aListOfAllCarsByRequestedManufacturerIsReturned() {
+        Assert.assertEquals(200, response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        Assert.assertEquals("success", message);
+        List<Map<String, Object>> cars = response.jsonPath().get("data");
+        Assert.assertTrue(cars.size() > 0);
     }
 
     /**
-     *
      * Car Tests
-     *
      */
 
     @When("User requests a list of all cars")
