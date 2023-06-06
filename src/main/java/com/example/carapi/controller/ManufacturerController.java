@@ -35,11 +35,14 @@ public class ManufacturerController {
     @GetMapping(path = "/manufacturer/{manufacturerId}")
     private ResponseEntity<?> getManufacturerById(@PathVariable Long manufacturerId) {
         message = new HashMap<>();
-
-        Manufacturer manufacturer = manufacturerService.getManufacturerById(manufacturerId);
-        message.put("message", "success");
-        message.put("data", manufacturer);
-        return new ResponseEntity<>(message, HttpStatus.FOUND);
-
+        try {
+            Manufacturer manufacturer = manufacturerService.getManufacturerById(manufacturerId);
+            message.put("message", "success");
+            message.put("data", manufacturer);
+            return new ResponseEntity<>(message, HttpStatus.FOUND);
+        } catch (Exception e) {
+            message.put("message",e.getMessage());
+            return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+        }
     }
 }
