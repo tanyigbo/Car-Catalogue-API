@@ -2,6 +2,7 @@ package com.example.carapi.service;
 
 import com.example.carapi.exception.InformationNotFoundException;
 import com.example.carapi.model.Car;
+import com.example.carapi.model.Manufacturer;
 import com.example.carapi.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,11 @@ public class CarService {
         return carRepository.findAll();
     }
 
-    public Car getCarById(Long car_id){
-        Optional<Car> car = carRepository.findById(car_id);
+    public Car getCarById(Long carId){
+        Optional<Car> car = carRepository.findById(carId);
         if(car.isPresent()){
             return car.get();
         }
-        throw new InformationNotFoundException("Car with ID " + car_id + " was not found.");
+        throw new InformationNotFoundException("Car with ID " + carId + " was not found.");
     }
 }

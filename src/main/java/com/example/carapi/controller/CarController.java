@@ -1,7 +1,9 @@
 package com.example.carapi.controller;
 
 import com.example.carapi.model.Car;
+import com.example.carapi.model.Manufacturer;
 import com.example.carapi.service.CarService;
+import com.example.carapi.service.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,33 +21,51 @@ public class CarController {
 
     private static HashMap<String, Object> message;
     private final CarService carService;
+    private final ManufacturerService manufacturerService;
 
     @Autowired
-    public CarController(CarService carService) {
+    public CarController(CarService carService, ManufacturerService manufacturerService) {
         this.carService = carService;
+        this.manufacturerService = manufacturerService;
     }
 
     @GetMapping(path = "/cars")
     public ResponseEntity<?> getAllCars() {
         message = new HashMap<>();
         List<Car> cars = carService.getAllCars();
-        message.put("message","success");
-        message.put("data",cars);
+        message.put("message", "success");
+        message.put("data", cars);
         return new ResponseEntity<>(message, HttpStatus.FOUND);
     }
 
-    @GetMapping(path = "/cars/{car_id}")
-    public ResponseEntity<?> getCarById(@PathVariable Long car_id){
-        message =new HashMap<>();
+//    @GetMapping(path = "/cars/manufacturer/{manufacturerId}")
+//    public ResponseEntity<?> getCarsByManufactureId(@PathVariable Long manufacturerId) {
+//        message = new HashMap<>();
+//        try {
+//            Manufacturer manufacturer = manufacturerService.getManufacturerById(manufacturerId);
+//            List<Car> cars = carService.getCarsByManufactureId(manufacturer);
+//            message.put("message", "success");
+//            message.put("data", cars);
+//            return new ResponseEntity<>(message, HttpStatus.FOUND);
+//        }catch (Exception e){
+//
+//        }
+//
+//
+//    }
+
+    @GetMapping(path = "/cars/{carId}")
+    public ResponseEntity<?> getCarById(@PathVariable Long carId) {
+        message = new HashMap<>();
         try {
-            Car car = carService.getCarById(car_id);
-            message.put("message","success");
-            message.put("data",car);
-            return new ResponseEntity<>(message,HttpStatus.FOUND);
-        }catch (Exception e){
-            message.put("message","failure");
-            message.put("data",e.getMessage());
-            return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+            Car car = carService.getCarById(carId);
+            message.put("message", "success");
+            message.put("data", car);
+            return new ResponseEntity<>(message, HttpStatus.FOUND);
+        } catch (Exception e) {
+            message.put("message", "failure");
+            message.put("data", e.getMessage());
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
 
     }
