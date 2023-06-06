@@ -50,9 +50,29 @@ public class Definitions {
         Assert.assertEquals("success", message);
         Map<String, Object> manufacturer = response.jsonPath().get("data");
         Assert.assertEquals(2, manufacturer.get("id"));
-        Assert.assertEquals("BMW",manufacturer.get("name"));
-        Assert.assertEquals("Germany",manufacturer.get("country"));
+        Assert.assertEquals("BMW", manufacturer.get("name"));
+        Assert.assertEquals("Germany", manufacturer.get("country"));
     }
+
+    @When("User requests a manufacturer by id that does not exist")
+    public void userRequestsAManufacturerByIdThatDoesNotExist() {
+        response = request.get(BASE_URL + port + "/api/manufacturer/10");
+    }
+
+    @Then("Error message returned stating manufacture not found")
+    public void errorMessageReturnedStatingManufactureNotFound() {
+        Assert.assertEquals(404,response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        String expected = "Manufacturer with ID 10 was not found.";
+        Assert.assertEquals(expected,message);
+    }
+
+    /**
+     *
+     * Car Tests
+     *
+     */
+
     @When("User requests a list of all cars")
     public void userRequestsAListOfAllCars() {
         response = request.get(BASE_URL + port + "/api/cars");
