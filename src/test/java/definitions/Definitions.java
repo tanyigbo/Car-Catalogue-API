@@ -111,4 +111,17 @@ public class Definitions {
         Assert.assertEquals(1, car.get("id"));
         Assert.assertEquals("e-tron GT", car.get("model"));
     }
+
+    @When("User requests a car by id that does not exist")
+    public void userRequestsACarByIdThatDoesNotExist() {
+        response = request.get(BASE_URL + port + "/api/cars/13");
+    }
+
+    @Then("Error message returned stating car not found")
+    public void errorMessageReturnedStatingCarNotFound() {
+        Assert.assertEquals(404, response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        String expected = "Car with ID 13 was not found.";
+        Assert.assertEquals(expected, message);
+    }
 }

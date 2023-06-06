@@ -7,3 +7,5 @@ Feature: Car Features
   Scenario: User views car by id
     When User requests a car by id
     Then Requested car is returned
+    When User requests a car by id that does not exist
+    Then Error message returned stating car not found
