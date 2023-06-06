@@ -51,4 +51,14 @@ public class ManufacturerController {
             return failureRequestResponse(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(path = "/manufacturers/{manufacturerId}/cars")
+    private ResponseEntity<?> getAllCarsByManufacturer(@PathVariable Long manufacturerId) {
+        try {
+            Manufacturer manufacturer = manufacturerService.getManufacturerById(manufacturerId);
+            return successfulRequestResponse(manufacturer.getCarList(),HttpStatus.OK);
+        }catch (Exception e){
+            return failureRequestResponse(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
 }
