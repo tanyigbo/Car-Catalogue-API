@@ -2,7 +2,6 @@ package com.example.carapi.service;
 
 import com.example.carapi.exception.InformationNotFoundException;
 import com.example.carapi.model.Car;
-import com.example.carapi.model.Manufacturer;
 import com.example.carapi.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
