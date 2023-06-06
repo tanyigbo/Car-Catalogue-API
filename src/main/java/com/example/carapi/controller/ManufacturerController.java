@@ -22,27 +22,33 @@ public class ManufacturerController {
         this.manufacturerService = manufacturerService;
     }
 
+    private ResponseEntity<?> successfulRequestResponse(Object data, HttpStatus status) {
+        message = new HashMap<>();
+        message.put("message", "success");
+        message.put("data", data);
+        return new ResponseEntity<>(message, status);
+    }
+
+    private ResponseEntity<?> failureRequestResponse(String responseMessage, HttpStatus status) {
+        message = new HashMap<>();
+        message.put("message", responseMessage);
+        return new ResponseEntity<>(message, status);
+    }
+
     // http://localhost:8080/api/manufacturers
     @GetMapping(path = "/manufacturers")
     public ResponseEntity<?> getAllManufacturers() {
-        message = new HashMap<>();
         List<Manufacturer> manufacturers = manufacturerService.getAllManufacturers();
-        message.put("message", "success");
-        message.put("data", manufacturers);
-        return new ResponseEntity<>(message, HttpStatus.OK);
+        return successfulRequestResponse(manufacturers, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/manufacturer/{manufacturerId}")
+    @GetMapping(path = "/manufacturers/{manufacturerId}")
     private ResponseEntity<?> getManufacturerById(@PathVariable Long manufacturerId) {
-        message = new HashMap<>();
         try {
             Manufacturer manufacturer = manufacturerService.getManufacturerById(manufacturerId);
-            message.put("message", "success");
-            message.put("data", manufacturer);
-            return new ResponseEntity<>(message, HttpStatus.FOUND);
+            return successfulRequestResponse(manufacturer,HttpStatus.FOUND);
         } catch (Exception e) {
-            message.put("message",e.getMessage());
-            return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+            return failureRequestResponse(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 }
