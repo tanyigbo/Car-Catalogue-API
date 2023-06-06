@@ -5,10 +5,7 @@ import com.example.carapi.service.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,9 +27,19 @@ public class ManufacturerController {
     public ResponseEntity<?> getAllManufacturers() {
         message = new HashMap<>();
         List<Manufacturer> manufacturers = manufacturerService.getAllManufacturers();
-        message.put("message","success");
-        message.put("data",manufacturers);
+        message.put("message", "success");
+        message.put("data", manufacturers);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/manufacturer/{manufacturerId}")
+    private ResponseEntity<?> getManufacturerById(@PathVariable Long manufacturerId) {
+        message = new HashMap<>();
+
+        Manufacturer manufacturer = manufacturerService.getManufacturerById(manufacturerId);
+        message.put("message", "success");
+        message.put("data", manufacturer);
+        return new ResponseEntity<>(message, HttpStatus.FOUND);
+
+    }
 }
