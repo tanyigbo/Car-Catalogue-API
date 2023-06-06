@@ -1,4 +1,4 @@
-Feature: TBD
+Feature: Manufacturer Features
 
   Scenario: User views all manufacturers
     When User requests a list of all manufacturers
@@ -13,11 +13,3 @@ Feature: TBD
   Scenario: User views all cars by manufacturer
     When User requests a list of all cars by manufacturer
     Then A list of all cars by requested manufacturer is returned
-
-  Scenario: User views all cars
-    When User requests a list of all cars
-    Then A list of all cars is returned
-
-  Scenario: User views car by id
-    When User requests a car by id
-    Then Requested car is returned

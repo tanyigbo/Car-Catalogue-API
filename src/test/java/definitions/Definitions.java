@@ -70,7 +70,6 @@ public class Definitions {
     @When("User requests a list of all cars by manufacturer")
     public void userRequestsAListOfAllCarsByManufacturer() {
         response = request.get(BASE_URL + port + "/api/manufacturers/1/cars");
-        response.prettyPrint();
     }
 
     @Then("A list of all cars by requested manufacturer is returned")
