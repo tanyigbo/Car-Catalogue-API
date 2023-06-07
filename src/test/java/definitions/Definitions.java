@@ -1,10 +1,8 @@
 package definitions;
 
 import com.example.carapi.CarApiApplication;
-import com.example.carapi.model.Car;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.it.Ma;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
