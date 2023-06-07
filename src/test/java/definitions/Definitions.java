@@ -20,12 +20,19 @@ import java.util.Map;
 public class Definitions {
 
     private static final String BASE_URL = "http://localhost:";
+    private static final String SUCCESS = "success";
     private static final RequestSpecification request = RestAssured.given();
     private static Response response;
 
     @LocalServerPort
     String port;
 
+
+    /**
+     *
+     * Manufacturer Tests
+     *
+     */
     @When("User requests a list of all manufacturers")
     public void userRequestsAListOfAllManufacturers() {
         response = request.get(BASE_URL + port + "/api/manufacturers");
@@ -47,7 +54,7 @@ public class Definitions {
     public void requestedManufacturerIsReturned() {
         Assert.assertEquals(302, response.getStatusCode());
         String message = response.jsonPath().get("message");
-        Assert.assertEquals("success", message);
+        Assert.assertEquals(SUCCESS, message);
         Map<String, Object> manufacturer = response.jsonPath().get("data");
         Assert.assertEquals(2, manufacturer.get("id"));
         Assert.assertEquals("BMW", manufacturer.get("name"));
@@ -76,15 +83,16 @@ public class Definitions {
     public void aListOfAllCarsByRequestedManufacturerIsReturned() {
         Assert.assertEquals(200, response.getStatusCode());
         String message = response.jsonPath().get("message");
-        Assert.assertEquals("success", message);
+        Assert.assertEquals(SUCCESS, message);
         List<Map<String, Object>> cars = response.jsonPath().get("data");
         Assert.assertTrue(cars.size() > 0);
     }
 
     /**
+     *
      * Car Tests
+     *
      */
-
     @When("User requests a list of all cars")
     public void userRequestsAListOfAllCars() {
         response = request.get(BASE_URL + port + "/api/cars");
@@ -107,7 +115,7 @@ public class Definitions {
     public void requestedCarIsReturned() {
         Assert.assertEquals(302, response.getStatusCode());
         String message = response.jsonPath().get("message");
-        Assert.assertEquals("success", message);
+        Assert.assertEquals(SUCCESS, message);
         Map<String, Object> car = response.jsonPath().get("data");
         Assert.assertEquals(1, car.get("id"));
         Assert.assertEquals("e-tron GT", car.get("model"));
@@ -135,7 +143,7 @@ public class Definitions {
     public void aListOfAllImagesOfRequestedCarIsReturned() {
         Assert.assertEquals(200, response.getStatusCode());
         String message = response.jsonPath().get("message");
-        Assert.assertEquals("success", message);
+        Assert.assertEquals(SUCCESS, message);
         List<Map<String, String>> images = response.jsonPath().get("data");
         Assert.assertTrue(images.size() > 0);
     }
@@ -149,10 +157,32 @@ public class Definitions {
     public void listOfAllReviewsOfRequestedCarIsReturned() {
         Assert.assertEquals(200,response.getStatusCode());
         String message = response.jsonPath().get("message");
-        Assert.assertEquals("success",message);
+        Assert.assertEquals(SUCCESS,message);
         List<Map<String,Object>> reviews = response.jsonPath().get("data");
         Assert.assertTrue(reviews.size() > 0);
         Assert.assertEquals("Title 5",reviews.get(1).get("title"));
         Assert.assertEquals("Reviewer 5",reviews.get(1).get("reviewerName"));
+    }
+
+    /**
+     *
+     * Review Tests
+     *
+     */
+    @When("User requests a list of images of specific review")
+    public void userRequestsAListOfImagesOfSpecificReview() {
+        response = request.get(BASE_URL + port + "/api/reviews/4/images");
+    }
+
+    @Then("List of all images of requested review is returned")
+    public void listOfAllImagesOfRequestedReviewIsReturned() {
+        Assert.assertEquals(200,response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        Assert.assertEquals(SUCCESS,message);
+        List<Map<String ,Object>> images = response.jsonPath().get("data");
+        Assert.assertTrue(images.size()>0);
+        Assert.assertEquals(4,images.get(0).get("id"));
+        Assert.assertEquals("reviewImg04.png",images.get(0).get("imageAddress"));
+        Assert.assertEquals(5,images.get(1).get("id"));
     }
 }
