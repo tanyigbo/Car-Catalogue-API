@@ -40,4 +40,14 @@ public class CarController {
             return responseController.failureRequestResponse(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping(path = "/cars/{carId}/images")
+    public ResponseEntity<?> getAllImagesOfCar(@PathVariable Long carId){
+        try {
+            Car car = carService.getCarById(carId);
+            return responseController.successfulRequestResponse(car.getImageList(),HttpStatus.OK);
+        }catch (Exception e){
+            return responseController.failureRequestResponse(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
 }
