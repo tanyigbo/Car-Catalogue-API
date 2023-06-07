@@ -1,12 +1,16 @@
 package definitions;
 
 import com.example.carapi.CarApiApplication;
+import com.example.carapi.model.Car;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.it.Ma;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -29,9 +33,7 @@ public class Definitions {
 
 
     /**
-     *
      * Manufacturer Tests
-     *
      */
     @When("User requests a list of all manufacturers")
     public void userRequestsAListOfAllManufacturers() {
@@ -89,9 +91,7 @@ public class Definitions {
     }
 
     /**
-     *
      * Car Tests
-     *
      */
     @When("User requests a list of all cars")
     public void userRequestsAListOfAllCars() {
@@ -138,7 +138,7 @@ public class Definitions {
     public void userRequestsAListOfImagesOfASpecificCar() {
         response = request.get(BASE_URL + port + "/api/cars/1/images");
     }
-    
+
     @Then("A list of all images of requested car is returned")
     public void aListOfAllImagesOfRequestedCarIsReturned() {
         Assert.assertEquals(200, response.getStatusCode());
@@ -150,24 +150,22 @@ public class Definitions {
 
     @When("User requests all reviews of specific car")
     public void userRequestsAllReviewsOfSpecificCar() {
-        response= request.get(BASE_URL + port+"/api/cars/5/reviews");
+        response = request.get(BASE_URL + port + "/api/cars/5/reviews");
     }
 
     @Then("List of all reviews of requested car is returned")
     public void listOfAllReviewsOfRequestedCarIsReturned() {
-        Assert.assertEquals(200,response.getStatusCode());
+        Assert.assertEquals(200, response.getStatusCode());
         String message = response.jsonPath().get("message");
-        Assert.assertEquals(SUCCESS,message);
-        List<Map<String,Object>> reviews = response.jsonPath().get("data");
+        Assert.assertEquals(SUCCESS, message);
+        List<Map<String, Object>> reviews = response.jsonPath().get("data");
         Assert.assertTrue(reviews.size() > 0);
-        Assert.assertEquals("Title 5",reviews.get(1).get("title"));
-        Assert.assertEquals("Reviewer 5",reviews.get(1).get("reviewerName"));
+        Assert.assertEquals("Title 5", reviews.get(1).get("title"));
+        Assert.assertEquals("Reviewer 5", reviews.get(1).get("reviewerName"));
     }
 
     /**
-     *
      * Review Tests
-     *
      */
     @When("User requests a list of images of specific review")
     public void userRequestsAListOfImagesOfSpecificReview() {
@@ -176,13 +174,34 @@ public class Definitions {
 
     @Then("List of all images of requested review is returned")
     public void listOfAllImagesOfRequestedReviewIsReturned() {
-        Assert.assertEquals(200,response.getStatusCode());
+        Assert.assertEquals(200, response.getStatusCode());
         String message = response.jsonPath().get("message");
-        Assert.assertEquals(SUCCESS,message);
-        List<Map<String ,Object>> images = response.jsonPath().get("data");
-        Assert.assertTrue(images.size()>0);
-        Assert.assertEquals(4,images.get(0).get("id"));
-        Assert.assertEquals("reviewImg04.png",images.get(0).get("imageAddress"));
-        Assert.assertEquals(5,images.get(1).get("id"));
+        Assert.assertEquals(SUCCESS, message);
+        List<Map<String, Object>> images = response.jsonPath().get("data");
+        Assert.assertTrue(images.size() > 0);
+        Assert.assertEquals(4, images.get(0).get("id"));
+        Assert.assertEquals("reviewImg04.png", images.get(0).get("imageAddress"));
+        Assert.assertEquals(5, images.get(1).get("id"));
+        System.out.println(images);
+    }
+
+    @When("User provides new review info")
+    public void userProvidesNewReviewInfo() throws JSONException {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("title", "New Review");
+        requestBody.put("reviewText", "The red fox jumped over the brown fence.");
+        requestBody.put("reviewerName", "Superman");
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/reviews/new/3");
+    }
+
+    @Then("Created review returned")
+    public void createdReviewReturned() {
+        Assert.assertEquals(201, response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        Assert.assertEquals(SUCCESS, message);
+        Map<String, Object> review = response.jsonPath().get("data");
+        Assert.assertEquals("New Review", review.get("title"));
+        Assert.assertEquals("Superman", review.get("reviewerName"));
     }
 }
