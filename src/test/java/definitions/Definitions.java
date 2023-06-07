@@ -38,11 +38,11 @@ public class Definitions {
     @When("User requests a list of all manufacturers")
     public void userRequestsAListOfAllManufacturers() {
         response = request.get(BASE_URL + port + "/api/manufacturers");
+        Assert.assertEquals(200, response.getStatusCode());
     }
 
     @Then("A list of manufacturers is returned")
     public void aListOfManufacturersIsReturned() {
-        Assert.assertEquals(200, response.getStatusCode());
         List<Map<String, String>> manufacturers = response.jsonPath().get("data");
         Assert.assertTrue(manufacturers.size() > 0);
     }
@@ -50,11 +50,11 @@ public class Definitions {
     @When("User requests a manufacturer by id")
     public void userRequestsAManufacturerById() {
         response = request.get(BASE_URL + port + "/api/manufacturers/2");
+        Assert.assertEquals(302, response.getStatusCode());
     }
 
     @Then("Requested manufacturer is returned")
     public void requestedManufacturerIsReturned() {
-        Assert.assertEquals(302, response.getStatusCode());
         String message = response.jsonPath().get("message");
         Assert.assertEquals(SUCCESS, message);
         Map<String, Object> manufacturer = response.jsonPath().get("data");
@@ -66,11 +66,11 @@ public class Definitions {
     @When("User requests a manufacturer by id that does not exist")
     public void userRequestsAManufacturerByIdThatDoesNotExist() {
         response = request.get(BASE_URL + port + "/api/manufacturers/10");
+        Assert.assertEquals(404, response.getStatusCode());
     }
 
     @Then("Error message returned stating manufacture not found")
     public void errorMessageReturnedStatingManufactureNotFound() {
-        Assert.assertEquals(404, response.getStatusCode());
         String message = response.jsonPath().get("message");
         String expected = "Manufacturer with ID 10 was not found.";
         Assert.assertEquals(expected, message);
@@ -79,11 +79,11 @@ public class Definitions {
     @When("User requests a list of all cars by manufacturer")
     public void userRequestsAListOfAllCarsByManufacturer() {
         response = request.get(BASE_URL + port + "/api/manufacturers/1/cars");
+        Assert.assertEquals(200, response.getStatusCode());
     }
 
     @Then("A list of all cars by requested manufacturer is returned")
     public void aListOfAllCarsByRequestedManufacturerIsReturned() {
-        Assert.assertEquals(200, response.getStatusCode());
         String message = response.jsonPath().get("message");
         Assert.assertEquals(SUCCESS, message);
         List<Map<String, Object>> cars = response.jsonPath().get("data");
@@ -96,11 +96,11 @@ public class Definitions {
     @When("User requests a list of all cars")
     public void userRequestsAListOfAllCars() {
         response = request.get(BASE_URL + port + "/api/cars");
+        Assert.assertEquals(302, response.getStatusCode());
     }
 
     @Then("A list of all cars is returned")
     public void aListOfAllCarsIsReturned() {
-        Assert.assertEquals(302, response.getStatusCode());
         List<Map<String, String>> cars = response.jsonPath().get("data");
         Assert.assertTrue(cars.size() > 0);
         System.out.println(cars);
@@ -109,11 +109,11 @@ public class Definitions {
     @When("User requests a car by id")
     public void userRequestsACarById() {
         response = request.get(BASE_URL + port + "/api/cars/1");
+        Assert.assertEquals(302, response.getStatusCode());
     }
 
     @Then("Requested car is returned")
     public void requestedCarIsReturned() {
-        Assert.assertEquals(302, response.getStatusCode());
         String message = response.jsonPath().get("message");
         Assert.assertEquals(SUCCESS, message);
         Map<String, Object> car = response.jsonPath().get("data");
@@ -124,11 +124,11 @@ public class Definitions {
     @When("User requests a car by id that does not exist")
     public void userRequestsACarByIdThatDoesNotExist() {
         response = request.get(BASE_URL + port + "/api/cars/13");
+        Assert.assertEquals(404, response.getStatusCode());
     }
 
     @Then("Error message returned stating car not found")
     public void errorMessageReturnedStatingCarNotFound() {
-        Assert.assertEquals(404, response.getStatusCode());
         String message = response.jsonPath().get("message");
         String expected = "Car with ID 13 was not found.";
         Assert.assertEquals(expected, message);
@@ -137,11 +137,11 @@ public class Definitions {
     @When("User requests a list of images of a specific car")
     public void userRequestsAListOfImagesOfASpecificCar() {
         response = request.get(BASE_URL + port + "/api/cars/1/images");
+        Assert.assertEquals(200, response.getStatusCode());
     }
 
     @Then("A list of all images of requested car is returned")
     public void aListOfAllImagesOfRequestedCarIsReturned() {
-        Assert.assertEquals(200, response.getStatusCode());
         String message = response.jsonPath().get("message");
         Assert.assertEquals(SUCCESS, message);
         List<Map<String, String>> images = response.jsonPath().get("data");
@@ -151,11 +151,11 @@ public class Definitions {
     @When("User requests all reviews of specific car")
     public void userRequestsAllReviewsOfSpecificCar() {
         response = request.get(BASE_URL + port + "/api/cars/5/reviews");
+        Assert.assertEquals(200, response.getStatusCode());
     }
 
     @Then("List of all reviews of requested car is returned")
     public void listOfAllReviewsOfRequestedCarIsReturned() {
-        Assert.assertEquals(200, response.getStatusCode());
         String message = response.jsonPath().get("message");
         Assert.assertEquals(SUCCESS, message);
         List<Map<String, Object>> reviews = response.jsonPath().get("data");
@@ -170,11 +170,11 @@ public class Definitions {
     @When("User requests a list of images of specific review")
     public void userRequestsAListOfImagesOfSpecificReview() {
         response = request.get(BASE_URL + port + "/api/reviews/4/images");
+        Assert.assertEquals(200, response.getStatusCode());
     }
 
     @Then("List of all images of requested review is returned")
     public void listOfAllImagesOfRequestedReviewIsReturned() {
-        Assert.assertEquals(200, response.getStatusCode());
         String message = response.jsonPath().get("message");
         Assert.assertEquals(SUCCESS, message);
         List<Map<String, Object>> images = response.jsonPath().get("data");
@@ -182,7 +182,6 @@ public class Definitions {
         Assert.assertEquals(4, images.get(0).get("id"));
         Assert.assertEquals("reviewImg04.png", images.get(0).get("imageAddress"));
         Assert.assertEquals(5, images.get(1).get("id"));
-        System.out.println(images);
     }
 
     @When("User provides new review info")
@@ -193,15 +192,36 @@ public class Definitions {
         requestBody.put("reviewerName", "Superman");
         request.header("Content-Type", "application/json");
         response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/reviews/new/3");
+        Assert.assertEquals(201, response.getStatusCode());
     }
 
     @Then("Created review returned")
     public void createdReviewReturned() {
-        Assert.assertEquals(201, response.getStatusCode());
         String message = response.jsonPath().get("message");
         Assert.assertEquals(SUCCESS, message);
         Map<String, Object> review = response.jsonPath().get("data");
         Assert.assertEquals("New Review", review.get("title"));
         Assert.assertEquals("Superman", review.get("reviewerName"));
     }
+
+    @When("User provides new image for review")
+    public void userProvidesNewImageForReview() throws JSONException {
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("imageAddress", "superNewImageUrl.png");
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/reviews/newImage/6");
+        Assert.assertEquals(201, response.getStatusCode());
+    }
+
+    @Then("Image is added to the review")
+    public void imageIsAddedToTheReview() {
+        String message = response.jsonPath().get("message");
+        Assert.assertEquals(SUCCESS, message);
+        List<Map<String, Object>> images = response.jsonPath().get("data");
+        System.out.println(images);
+        Assert.assertTrue(images.size() > 0);
+        Assert.assertEquals("superNewImageUrl.png", images.get(images.size() - 1).get("imageAddress"));
+    }
+
+
 }
