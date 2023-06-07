@@ -1,5 +1,7 @@
 package com.example.carapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class ReviewImage {
     @Column
     private String imageAddress;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "review_id")
     private Review review;

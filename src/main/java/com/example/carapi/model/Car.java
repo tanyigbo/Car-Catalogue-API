@@ -25,12 +25,10 @@ public class Car {
     @JsonIgnore
     private Manufacturer manufacturer;
 
-    @JsonIgnore
     @Column
     @OneToMany(mappedBy = "car")
     private List<Image> imageList;
 
-    @JsonIgnore
     @Column
     @OneToMany (mappedBy = "car")
     private List<Review> reviewList;

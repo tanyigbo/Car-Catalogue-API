@@ -1,5 +1,7 @@
 package com.example.carapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 
@@ -15,6 +17,7 @@ public class Image {
     @Column
     private String imageAddress;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
