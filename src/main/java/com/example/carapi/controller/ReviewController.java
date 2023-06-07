@@ -2,6 +2,8 @@ package com.example.carapi.controller;
 
 import com.example.carapi.model.Car;
 import com.example.carapi.model.Review;
+import com.example.carapi.model.ReviewImage;
+import com.example.carapi.repository.ReviewImageRepository;
 import com.example.carapi.service.CarService;
 import com.example.carapi.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +34,22 @@ public class ReviewController {
         }
     }
 
-    @PostMapping(path = "reviews/new/{carId}")
+    @PostMapping(path = "/reviews/new/{carId}")
     public ResponseEntity<?> addNewReview(@PathVariable Long carId, @RequestBody Review reviewObj) {
         try {
             Review review = reviewService.createReview(carId, reviewObj);
             return responseController.successfulRequestResponse(review, HttpStatus.CREATED);
         } catch (Exception e) {
+            return responseController.failureRequestResponse(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping(path = "/reviews/newImage/{reviewId}")
+    public ResponseEntity<?> addNewReviewImageToReview(@PathVariable Long reviewId, @RequestBody ReviewImage reviewImage){
+        try {
+            Review review = reviewService.addImageToReview(reviewId,reviewImage);
+            return responseController.successfulRequestResponse(review.getReviewImageList(),HttpStatus.CREATED);
+        }catch (Exception e){
             return responseController.failureRequestResponse(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
