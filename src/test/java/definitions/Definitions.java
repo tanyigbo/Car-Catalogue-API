@@ -130,8 +130,7 @@ public class Definitions {
     public void userRequestsAListOfImagesOfASpecificCar() {
         response = request.get(BASE_URL + port + "/api/cars/1/images");
     }
-
-
+    
     @Then("A list of all images of requested car is returned")
     public void aListOfAllImagesOfRequestedCarIsReturned() {
         Assert.assertEquals(200, response.getStatusCode());
@@ -139,5 +138,21 @@ public class Definitions {
         Assert.assertEquals("success", message);
         List<Map<String, String>> images = response.jsonPath().get("data");
         Assert.assertTrue(images.size() > 0);
+    }
+
+    @When("User requests all reviews of specific car")
+    public void userRequestsAllReviewsOfSpecificCar() {
+        response= request.get(BASE_URL + port+"/api/cars/5/reviews");
+    }
+
+    @Then("List of all reviews of requested car is returned")
+    public void listOfAllReviewsOfRequestedCarIsReturned() {
+        Assert.assertEquals(200,response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        Assert.assertEquals("success",message);
+        List<Map<String,Object>> reviews = response.jsonPath().get("data");
+        Assert.assertTrue(reviews.size() > 0);
+        Assert.assertEquals("Title 5",reviews.get(1).get("title"));
+        Assert.assertEquals("Reviewer 5",reviews.get(1).get("reviewerName"));
     }
 }

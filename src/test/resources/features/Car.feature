@@ -13,3 +13,7 @@ Feature: Car Features
   Scenario: User views all images of car
     When User requests a list of images of a specific car
     Then A list of all images of requested car is returned
+
+  Scenario: User views all reviews of car
+    When User requests all reviews of specific car
+    Then List of all reviews of requested car is returned
