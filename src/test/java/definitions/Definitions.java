@@ -95,6 +95,7 @@ public class Definitions {
         Assert.assertEquals(302, response.getStatusCode());
         List<Map<String, String>> cars = response.jsonPath().get("data");
         Assert.assertTrue(cars.size() > 0);
+        System.out.println(cars);
     }
 
     @When("User requests a car by id")
@@ -123,5 +124,20 @@ public class Definitions {
         String message = response.jsonPath().get("message");
         String expected = "Car with ID 13 was not found.";
         Assert.assertEquals(expected, message);
+    }
+
+    @When("User requests a list of images of a specific car")
+    public void userRequestsAListOfImagesOfASpecificCar() {
+        response = request.get(BASE_URL + port + "/api/cars/1/images");
+    }
+
+
+    @Then("A list of all images of requested car is returned")
+    public void aListOfAllImagesOfRequestedCarIsReturned() {
+        Assert.assertEquals(200, response.getStatusCode());
+        String message = response.jsonPath().get("message");
+        Assert.assertEquals("success", message);
+        List<Map<String, String>> images = response.jsonPath().get("data");
+        Assert.assertTrue(images.size() > 0);
     }
 }
