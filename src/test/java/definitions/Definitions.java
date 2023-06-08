@@ -74,18 +74,19 @@ public class Definitions {
         Assert.assertEquals(expected, message);
     }
 
-    @When("User requests a list of all cars by manufacturer")
-    public void userRequestsAListOfAllCarsByManufacturer() {
-        response = request.get(BASE_URL + port + "/api/manufacturers/1/cars");
+    @When("User requests a list of all cars by manufacturer name")
+    public void userRequestsAListOfAllCarsByManufacturerName() {
+        response = request.get(BASE_URL + port + "/api/manufacturers/Tesla/cars");
         Assert.assertEquals(200, response.getStatusCode());
     }
 
-    @Then("A list of all cars by requested manufacturer is returned")
-    public void aListOfAllCarsByRequestedManufacturerIsReturned() {
+    @Then("List of all cars by requested manufacturer is returned")
+    public void listOfAllCarsByRequestedManufacturerIsReturned() {
         String message = response.jsonPath().get("message");
         Assert.assertEquals(SUCCESS, message);
         List<Map<String, Object>> cars = response.jsonPath().get("data");
         Assert.assertTrue(cars.size() > 0);
+        Assert.assertEquals("Model S", cars.get(0).get("model"));
     }
 
     /**
@@ -216,10 +217,7 @@ public class Definitions {
         String message = response.jsonPath().get("message");
         Assert.assertEquals(SUCCESS, message);
         List<Map<String, Object>> images = response.jsonPath().get("data");
-        System.out.println(images);
         Assert.assertTrue(images.size() > 0);
         Assert.assertEquals("superNewImageUrl.png", images.get(images.size() - 1).get("imageAddress"));
     }
-
-
 }

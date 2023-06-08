@@ -31,4 +31,8 @@ public class ManufacturerService {
         throw new InformationNotFoundException("Manufacturer with ID " + manufacturerId + " was not found.");
     }
 
+    public Manufacturer getManufacturerByName(String manufacturerName){
+        return manufacturerRepository.getManufacturerByName(manufacturerName);
+    }
+
 }

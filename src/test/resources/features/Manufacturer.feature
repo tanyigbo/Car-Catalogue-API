@@ -11,5 +11,5 @@ Feature: Manufacturer Features
     Then Error message returned stating manufacture not found
 
   Scenario: User views all cars by manufacturer
-    When User requests a list of all cars by manufacturer
-    Then A list of all cars by requested manufacturer is returned
+    When User requests a list of all cars by manufacturer name
+    Then List of all cars by requested manufacturer is returned

@@ -39,13 +39,9 @@ public class ManufacturerController {
         }
     }
 
-    @GetMapping(path = "/manufacturers/{manufacturerId}/cars")
-    private ResponseEntity<?> getAllCarsByManufacturer(@PathVariable Long manufacturerId) {
-        try {
-            Manufacturer manufacturer = manufacturerService.getManufacturerById(manufacturerId);
-            return responseController.successfulRequestResponse(manufacturer.getCarList(),HttpStatus.OK);
-        }catch (Exception e){
-            return responseController.failureRequestResponse(e.getMessage(),HttpStatus.NOT_FOUND);
-        }
+    @GetMapping(path = "/manufacturers/{manufacturerName}/cars")
+    public ResponseEntity<?> getAllCarsByManufacturerName(@PathVariable String manufacturerName) {
+        Manufacturer manufacturer = manufacturerService.getManufacturerByName(manufacturerName);
+        return responseController.successfulRequestResponse(manufacturer.getCarList(),HttpStatus.OK);
     }
 }
