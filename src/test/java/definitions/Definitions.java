@@ -133,6 +133,19 @@ public class Definitions {
         Assert.assertEquals(expected, message);
     }
 
+    @When("User requests a car by name")
+    public void userRequestsACarByName() {
+        response = request.get(BASE_URL + port + "/api/cars/model/e-tron_GT");
+        Assert.assertEquals(200, response.getStatusCode());
+        response.prettyPrint();
+    }
+
+    @Then("Model car is returned")
+    public void modelCarIsReturned() {
+        String message = response.jsonPath().get("message");
+        Assert.assertEquals(SUCCESS, message);
+    }
+
     @When("User requests a list of images of a specific car")
     public void userRequestsAListOfImagesOfASpecificCar() {
         response = request.get(BASE_URL + port + "/api/cars/1/images");
@@ -220,4 +233,6 @@ public class Definitions {
         Assert.assertTrue(images.size() > 0);
         Assert.assertEquals("superNewImageUrl.png", images.get(images.size() - 1).get("imageAddress"));
     }
+
+
 }

@@ -10,6 +10,10 @@ Feature: Car Features
     When User requests a car by id that does not exist
     Then Error message returned stating car not found
 
+  Scenario: User views car by model
+    When User requests a car by name
+    Then Model car is returned
+
   Scenario: User views all images of car
     When User requests a list of images of a specific car
     Then A list of all images of requested car is returned
