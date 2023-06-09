@@ -30,4 +30,8 @@ public class CarService {
         }
         throw new InformationNotFoundException("Car with ID " + carId + " was not found.");
     }
+
+    public Car getCarByModel(String modelName){
+        return carRepository.getCarByModel(modelName);
+    }
 }
