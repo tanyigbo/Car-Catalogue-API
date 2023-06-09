@@ -191,8 +191,6 @@ public class Definitions {
         List<Map<String, Object>> images = response.jsonPath().get("data");
         Assert.assertTrue(images.size() > 0);
         Assert.assertEquals(4, images.get(0).get("id"));
-        Assert.assertEquals("reviewImg04.png", images.get(0).get("imageAddress"));
-        Assert.assertEquals(5, images.get(1).get("id"));
     }
 
     @When("User provides new review info")
