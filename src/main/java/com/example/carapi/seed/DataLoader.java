@@ -67,19 +67,18 @@ public class DataLoader implements CommandLineRunner {
     private void loadCarImageData() {
         if (imageRepository.count() == 0) {
             List<Car> cars = carRepository.findAll();
-            List<Image> images = Arrays.asList(
-                    new Image(1L, "address01.pny", cars.get(0)),
-                    new Image(2L, "address02.pny", cars.get(0)),
-                    new Image(3L, "address03.pny", cars.get(1)),
-                    new Image(4L, "address04.pny", cars.get(2)),
-                    new Image(5L, "address05.pny", cars.get(3)),
-                    new Image(6L, "address06.pny", cars.get(4)),
-                    new Image(7L, "address07.pny", cars.get(4)),
-                    new Image(8L, "address08.pny", cars.get(5)),
-                    new Image(9L, "address09.pny", cars.get(5)),
-                    new Image(10L, "address10.pny", cars.get(6))
-            );
-            imageRepository.saveAll(images);
+            String Base_URL = "https://raw.githubusercontent.com/tanyigbo/Car-Catalogue-API/front-end-changes/src/main/resources/images/car_images/";
+            List<String> values = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10");
+            values.forEach(value -> {
+                imageRepository.save(new Image(Base_URL + "Audi/e-tron_GT/GT_" + value + ".webp", cars.get(0)));
+                imageRepository.save(new Image(Base_URL + "Audi/Q4_e-tron/Q4_" + value + ".webp", cars.get(1)));
+                imageRepository.save(new Image(Base_URL + "BMW/i4/i4_" + value + ".webp", cars.get(2)));
+                imageRepository.save(new Image(Base_URL + "BMW/iX/ix_" + value + ".webp", cars.get(3)));
+                imageRepository.save(new Image(Base_URL + "Tesla/Model_S/ModelS_" + value + ".webp", cars.get(4)));
+                imageRepository.save(new Image(Base_URL + "Tesla/Model_3/Model3_" + value + ".webp", cars.get(5)));
+                imageRepository.save(new Image(Base_URL + "Hyundai/Ioniq_5/Ioniq5_" + value + ".webp", cars.get(6)));
+            });
+
         }
     }
 
