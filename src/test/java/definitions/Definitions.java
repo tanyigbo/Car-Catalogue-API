@@ -136,7 +136,6 @@ public class Definitions {
     public void userRequestsACarByName() {
         response = request.get(BASE_URL + port + "/api/cars/model/e-tron_GT");
         Assert.assertEquals(200, response.getStatusCode());
-        response.prettyPrint();
     }
 
     @Then("Model car is returned")
@@ -171,8 +170,8 @@ public class Definitions {
         Assert.assertEquals(SUCCESS, message);
         List<Map<String, Object>> reviews = response.jsonPath().get("data");
         Assert.assertTrue(reviews.size() > 0);
-        Assert.assertEquals("Title 5", reviews.get(1).get("title"));
-        Assert.assertEquals("Reviewer 5", reviews.get(1).get("reviewerName"));
+        Assert.assertEquals("Tesla Convertible", reviews.get(1).get("title"));
+        Assert.assertEquals("JOEL STOCKSDALE", reviews.get(1).get("reviewerName"));
     }
 
     /**
