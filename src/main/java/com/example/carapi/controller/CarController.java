@@ -26,7 +26,7 @@ public class CarController {
     }
 
     /**
-     * GET Request for all cars
+     * GET Request for all Cars
      * @return Response with a list of Cars
      */
     //http://localhost:8080/api/cars
@@ -37,7 +37,7 @@ public class CarController {
     }
 
     /**
-     * GET Request for car with matching id
+     * GET Request for Car with matching id
      * @param carId id of requested Car
      * @return Response with Car
      */

@@ -36,6 +36,9 @@ public class DataLoader implements CommandLineRunner {
         loadReviewImageData();
     }
 
+    /**
+     * Data loader for Manufacturer Repository
+     */
     private void loadManufactureData() {
         if (manufacturerRepository.count() == 0) {
             List<Manufacturer> manufacturers = Arrays.asList(
@@ -48,6 +51,9 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 
+    /**
+     * Data loader for Car Repository
+     */
     private void loadCarData() {
         if (carRepository.count() == 0) {
             List<Manufacturer> manufacturers = manufacturerRepository.findAll();
@@ -65,10 +71,13 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 
+    /**
+     * Data loader for Image Repository
+     */
     private void loadCarImageData() {
         if (imageRepository.count() == 0) {
             List<Car> cars = carRepository.findAll();
-            String Base_URL = "https://raw.githubusercontent.com/tanyigbo/Car-Catalogue-API/front-end-changes/src/main/resources/images/car_images/";
+            String Base_URL = "https://raw.githubusercontent.com/tanyigbo/Car-Catalogue-API/main/src/main/resources/images/car_images/";
             List<String> values = Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10");
             values.forEach(value -> {
                 imageRepository.save(new Image(Base_URL + "Audi/e-tron_GT/GT_" + value + ".webp", cars.get(0)));
@@ -83,6 +92,9 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 
+    /**
+     * Data loader for Review Repository
+     */
     private void loadReviewData() {
         if (reviewRepository.count() == 0) {
             List<Car> cars = carRepository.findAll();
@@ -98,10 +110,13 @@ public class DataLoader implements CommandLineRunner {
         }
     }
 
+    /**
+     * Data loader for Review Image Repository
+     */
     private void loadReviewImageData() {
         if (reviewImageRepository.count() == 0) {
             List<Review> reviews = reviewRepository.findAll();
-            String base_url = "https://raw.githubusercontent.com/tanyigbo/Car-Catalogue-API/front-end-changes/src/main/resources/images/review_images/";
+            String base_url = "https://raw.githubusercontent.com/tanyigbo/Car-Catalogue-API/main/src/main/resources/images/review_images/";
             List<ReviewImage> reviewImages = Arrays.asList(
                     new ReviewImage(base_url + "Hyundai/Ioniq_5/review_01/image_01.webp", reviews.get(0)),
                     new ReviewImage(base_url + "Audi/e-tron_GT/review_01/image_01.webp", reviews.get(1)),
