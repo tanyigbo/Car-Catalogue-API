@@ -9,41 +9,63 @@ import java.util.List;
 @Table(name = "cars")
 public class Car {
 
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column
     private String model;
-
     @Column
-    private Integer view_count = 0;
+    private int range;
+    @Column
+    private float batteryCap;
+    @Column
+    private float cargoVol;
+    @Column
+    private float length;
+    @Column
+    private float width;
+    @Column
+    private float height;
+    @Column
+    private String driveType;
 
     @ManyToOne
-    @JoinColumn(name = "manufacture_id")
+    @JoinColumn(name = "manufacturer_id")
     @JsonIgnore
-    private Manufacturer manufacture;
+    private Manufacturer manufacturer;
 
     @Column
     @OneToMany(mappedBy = "car")
     private List<Image> imageList;
 
     @Column
-    @OneToMany (mappedBy = "car")
+    @OneToMany(mappedBy = "car")
     private List<Review> reviewList;
 
     public Car() {
     }
 
-    public Car(Long id, String model, Manufacturer manufacture) {
-        this.id = id;
+    public Car(String model, int range, float batteryCap, float cargoVol, float length,
+               float width, float height, String driveType, Manufacturer manufacturer) {
         this.model = model;
-        this.manufacture = manufacture;
+        this.range = range;
+        this.batteryCap = batteryCap;
+        this.cargoVol = cargoVol;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.driveType = driveType;
+        this.manufacturer = manufacturer;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getModel() {
@@ -54,20 +76,68 @@ public class Car {
         this.model = model;
     }
 
-    public Integer getView_count() {
-        return view_count;
+    public int getRange() {
+        return range;
     }
 
-    public void setView_count(Integer view_count) {
-        this.view_count = view_count;
+    public void setRange(int range) {
+        this.range = range;
     }
 
-    public Manufacturer getManufacture() {
-        return manufacture;
+    public float getBatteryCap() {
+        return batteryCap;
     }
 
-    public void setManufacture(Manufacturer manufacturer) {
-        this.manufacture = manufacturer;
+    public void setBatteryCap(float batteryCap) {
+        this.batteryCap = batteryCap;
+    }
+
+    public float getCargoVol() {
+        return cargoVol;
+    }
+
+    public void setCargoVol(float cargoVol) {
+        this.cargoVol = cargoVol;
+    }
+
+    public float getLength() {
+        return length;
+    }
+
+    public void setLength(float length) {
+        this.length = length;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public String getDriveType() {
+        return driveType;
+    }
+
+    public void setDriveType(String driveType) {
+        this.driveType = driveType;
+    }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public List<Image> getImageList() {
@@ -84,17 +154,5 @@ public class Car {
 
     public void setReviewList(List<Review> reviewList) {
         this.reviewList = reviewList;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", model='" + model + '\'' +
-                ", view_count=" + view_count +
-                ", manufacturer=" + manufacture +
-                ", imageList=" + imageList +
-                ", reviewList=" + reviewList +
-                '}';
     }
 }
