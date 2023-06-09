@@ -25,6 +25,11 @@ public class Image {
     public Image() {
     }
 
+    public Image(String imageAddress, Car car) {
+        this.imageAddress = imageAddress;
+        this.car = car;
+    }
+
     public Image(Long id, String imageAddress, Car car) {
         this.id = id;
         this.imageAddress = imageAddress;
