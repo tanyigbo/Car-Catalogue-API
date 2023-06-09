@@ -41,6 +41,16 @@ public class CarController {
         }
     }
 
+    @GetMapping(path = "/cars/model/{carModel}")
+    public ResponseEntity<?> getCarByModel(@PathVariable String carModel) {
+        try {
+            Car car = carService.getCarByModel(carModel.replace("_"," "));
+            return responseController.successfulRequestResponse(car,HttpStatus.OK);
+        } catch (Exception e) {
+            return responseController.failureRequestResponse(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping(path = "/cars/{carId}/images")
     public ResponseEntity<?> getAllImagesOfCar(@PathVariable Long carId){
         try {
