@@ -56,10 +56,10 @@ public class DataLoader implements CommandLineRunner {
                     new Car("e-tron GT", 232, 93.4, 12.9, 196.5, 77.2, 55.5, "AWD", manufacturers.get(0)),
                     new Car("Q4 e-tron", 252, 82, 18.4, 180.6, 73.4, 64.3, "RWD", manufacturers.get(0)),
                     new Car("i4 M50", 240, 83.9, 16.6, 188.3, 72.9, 57, "AWD", manufacturers.get(1)),
-                    new Car("iX M60",324 ,111.5 ,17.7 ,195 ,77.4 ,66.7 ,"AWD" , manufacturers.get(1)),
-                    new Car("Model S",315 ,100 , 31.6, 196,77.3 ,56.9 , "AWD", manufacturers.get(3)),
-                    new Car("Model 3", 315, 75, 15, 184.8,76.1 , 56.8, "AWD", manufacturers.get(3)),
-                    new Car("Ioniq 5",256 , 72.6, 18.8, 182.5,74.4 ,63.2 ,"AWD" , manufacturers.get(2))
+                    new Car("iX M60", 324, 111.5, 17.7, 195, 77.4, 66.7, "AWD", manufacturers.get(1)),
+                    new Car("Model S", 315, 100, 31.6, 196, 77.3, 56.9, "AWD", manufacturers.get(3)),
+                    new Car("Model 3", 315, 75, 15, 184.8, 76.1, 56.8, "AWD", manufacturers.get(3)),
+                    new Car("Ioniq 5", 256, 72.6, 18.8, 182.5, 74.4, 63.2, "AWD", manufacturers.get(2))
             );
             carRepository.saveAll(cars);
         }
@@ -87,15 +87,12 @@ public class DataLoader implements CommandLineRunner {
         if (reviewRepository.count() == 0) {
             List<Car> cars = carRepository.findAll();
             List<Review> reviews = Arrays.asList(
-                    new Review(1L, "Title 1", "Review Text 1", "Reviewer 1", cars.get(0)),
-                    new Review(2L, "Title 2", "Review Text 2", "Reviewer 2", cars.get(1)),
-                    new Review(3L, "Title 3", "Review Text 3", "Reviewer 3", cars.get(2)),
-                    new Review(4L, "Title 4", "Review Text 4", "Reviewer 4", cars.get(4)),
-                    new Review(5L, "Title 5", "Review Text 5", "Reviewer 5", cars.get(4)),
-                    new Review(6L, "Title 6", "Review Text 6", "Reviewer 6", cars.get(4)),
-                    new Review(7L, "Title 7", "Review Text 7", "Reviewer 7", cars.get(5)),
-                    new Review(8L, "Title 8", "Review Text 8", "Reviewer 8", cars.get(5)),
-                    new Review(9L, "Title 9", "Review Text 9", "Reviewer 9", cars.get(6))
+                    new Review("Cupholder Test", "I absolutely adore the Hyundai Ioniq 5, and so was excited to spend a week with it when the EV landed in my driveway. When I first drove the Ioniq 5 in San Diego, though, I hadn't packed my favorite style water bottle: the big 32-ounce Nalgene.", "JOHN BELTZ SNYDER", cars.get(6)),
+                    new Review("Audi Hits a Bullseye", "We think the E-Tron GT is a winning package and an excellent ambassador for EVs. It speaks the visual and tactile language of cars, while providing all the benefits of a Tesla underneath. Audi has struck a bullseye.", "BEN HSU", cars.get(0)),
+                    new Review("BMW i4 Luggage Test", "On paper, the BMW i4 has 10 cubic-feet of space, which is on par with what you'd usually find in a coupe. Now, BMW would tell you that the i4 is a coupe — it is, after all, based on the 4 Series Gran Coupe.", "JAMES RISWICK", cars.get(2)),
+                    new Review("Get Anywhere", "Model 3 can get you anywhere you want to go — with industry-leading range and convenient charging options, all over the world. Model 3 charges up to 80% in 40 minutes on a Tesla Supercharger.", "EV Compare", cars.get(5)),
+                    new Review("We Rented a Tesla Model S Plaid", "Review Text 5", "Zac Palmer", cars.get(4)),
+                    new Review("Tesla Convertible", "While custom coach built Teslas aren't new, not even convertibles, this example from Italian design house Ares Design is one of the nicest we've seen. It's had quite a bit of work put into it as well, since not only is it a convertible, but it's a two-door, too.", "JOEL STOCKSDALE", cars.get(4))
             );
             reviewRepository.saveAll(reviews);
         }
@@ -104,19 +101,14 @@ public class DataLoader implements CommandLineRunner {
     private void loadReviewImageData() {
         if (reviewImageRepository.count() == 0) {
             List<Review> reviews = reviewRepository.findAll();
+            String base_url = "https://raw.githubusercontent.com/tanyigbo/Car-Catalogue-API/front-end-changes/src/main/resources/images/review_images/";
             List<ReviewImage> reviewImages = Arrays.asList(
-                    new ReviewImage(1L, "reviewImg01.png", reviews.get(0)),
-                    new ReviewImage(2L, "reviewImg02.png", reviews.get(2)),
-                    new ReviewImage(3L, "reviewImg03.png", reviews.get(2)),
-                    new ReviewImage(4L, "reviewImg04.png", reviews.get(3)),
-                    new ReviewImage(5L, "reviewImg05.png", reviews.get(3)),
-                    new ReviewImage(6L, "reviewImg06.png", reviews.get(3)),
-                    new ReviewImage(7L, "reviewImg07.png", reviews.get(4)),
-                    new ReviewImage(8L, "reviewImg08.png", reviews.get(5)),
-                    new ReviewImage(9L, "reviewImg09.png", reviews.get(5)),
-                    new ReviewImage(10L, "reviewImg10.png", reviews.get(6)),
-                    new ReviewImage(11L, "reviewImg11.png", reviews.get(7)),
-                    new ReviewImage(12L, "reviewImg12.png", reviews.get(8))
+                    new ReviewImage(base_url + "Hyundai/Ioniq_5/review_01/image_01.webp", reviews.get(0)),
+                    new ReviewImage(base_url + "Audi/e-tron_GT/review_01/image_01.webp", reviews.get(1)),
+                    new ReviewImage(base_url + "BMW/i4/review_01/image_01.jpg", reviews.get(2)),
+                    new ReviewImage(base_url + "Tesla/model_3/review_01/image_01.webp", reviews.get(3)),
+                    new ReviewImage(base_url + "Tesla/model_s/review_01/image_01.webp", reviews.get(4)),
+                    new ReviewImage(base_url + "Tesla/model_s/review_02/image_01.webp", reviews.get(5))
             );
             reviewImageRepository.saveAll(reviewImages);
         }

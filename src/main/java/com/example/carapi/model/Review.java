@@ -18,7 +18,7 @@ public class Review {
     @Column
     private String title;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String reviewText;
 
     @Column
