@@ -23,10 +23,10 @@
 
 
 ### ERD
+![ERD](https://github.com/tanyigbo/Car-Catalogue-API/blob/main/assests/ERD.png)
 
-
-
-
+### BDD Testing
+![BDD](https://github.com/tanyigbo/Car-Catalogue-API/blob/main/assests/BDD-testing.PNG)
 ##  Hurdles And Wins 
 
 
