@@ -7,6 +7,7 @@
 - [Planning Documentation](#planning-documentation)
   - [User Stories](#user-stories)
   - [ERD](#erd)
+  - [BDD](#bdd-testing)
 - [Tools and Technologies](#tools-and-technologies)
 - [Installation](#installation)
 - [Credits](#credits)
