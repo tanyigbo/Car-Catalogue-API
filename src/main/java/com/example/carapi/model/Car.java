@@ -19,15 +19,15 @@ public class Car {
     @Column
     private int range;
     @Column
-    private float batteryCap;
+    private double batteryCap;
     @Column
-    private float cargoVol;
+    private double cargoVol;
     @Column
-    private float length;
+    private double length;
     @Column
-    private float width;
+    private double width;
     @Column
-    private float height;
+    private double height;
     @Column
     private String driveType;
 
@@ -47,8 +47,8 @@ public class Car {
     public Car() {
     }
 
-    public Car(String model, int range, float batteryCap, float cargoVol, float length,
-               float width, float height, String driveType, Manufacturer manufacturer) {
+    public Car(String model, int range, double batteryCap, double cargoVol, double length,
+               double width, double height, String driveType, Manufacturer manufacturer) {
         this.model = model;
         this.range = range;
         this.batteryCap = batteryCap;
@@ -84,7 +84,7 @@ public class Car {
         this.range = range;
     }
 
-    public float getBatteryCap() {
+    public double getBatteryCap() {
         return batteryCap;
     }
 
@@ -92,7 +92,7 @@ public class Car {
         this.batteryCap = batteryCap;
     }
 
-    public float getCargoVol() {
+    public double getCargoVol() {
         return cargoVol;
     }
 
@@ -100,7 +100,7 @@ public class Car {
         this.cargoVol = cargoVol;
     }
 
-    public float getLength() {
+    public double getLength() {
         return length;
     }
 
@@ -108,7 +108,7 @@ public class Car {
         this.length = length;
     }
 
-    public float getWidth() {
+    public double getWidth() {
         return width;
     }
 
@@ -116,7 +116,7 @@ public class Car {
         this.width = width;
     }
 
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
 
