@@ -1,6 +1,5 @@
 # Car API
-
-
+The goal of this API was to be a repository for developers looking to "GIT" information on the electric vehicles on the market. As someone more comfortable with backend development, I wanted to build an efficient and easily maintainable application.
 
 # Table of Contents
 
@@ -16,7 +15,10 @@
 ## Planning Documentation 
 
 ### User Stories
-
+- As a user, I should be able to view all the cars available for sale.
+- As a user, I should be able to filter cars by manufacturer.
+- As a user, I should be able to view the details of any car.
+- As a user, I should be able to view reviews for any car.
 
 ### ERD
 ![ERD](https://github.com/tanyigbo/Car-Catalogue-API/blob/main/assests/ERD.png)
