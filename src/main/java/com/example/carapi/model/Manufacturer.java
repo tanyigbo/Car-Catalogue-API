@@ -21,9 +21,9 @@ public class Manufacturer {
     @Column(nullable = false)
     private String country;
 
-    @JsonIgnore
+//    @JsonIgnore
     @Column
-    @OneToMany(mappedBy = "manufacturer")
+    @OneToMany(mappedBy = "manufacture")
     private List<Car> carList;
 
     public Manufacturer() {
