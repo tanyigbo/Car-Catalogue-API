@@ -4,17 +4,12 @@
 
 # Table of Contents
 
-
-- [Project Overview](#project-overview)
 - [Planning Documentation](#planning-documentation)
   - [User Stories](#user-stories)
   - [ERD](#erd)
 - [Tools and Technologies](#tools-and-technologies)
 - [Installation](#installation)
 - [Credits](#credits)
-
-
-## Project Overview
 
 
 ## Planning Documentation 
@@ -27,9 +22,6 @@
 
 ### BDD Testing
 ![BDD](https://github.com/tanyigbo/Car-Catalogue-API/blob/main/assests/BDD-testing.PNG)
-##  Hurdles And Wins 
-
-
 
 ##  Tools and Technologies
 
