@@ -22,6 +22,10 @@ public class ManufacturerController {
         this.responseController = responseController;
     }
 
+    /**
+     * GET Request for all Manufacturers
+     * @return List of Manufacturers
+     */
     // http://localhost:8080/api/manufacturers
     @GetMapping(path = "/manufacturers")
     public ResponseEntity<?> getAllManufacturers() {
@@ -29,6 +33,12 @@ public class ManufacturerController {
         return responseController.successfulRequestResponse(manufacturers, HttpStatus.OK);
     }
 
+    /**
+     * GET Request for Manufacturer with matching id
+     * @param manufacturerId id of requested Manufacturer
+     * @return Manufacturer with matching ID
+     */
+    // http://localhost:8080/api/manufacturers/1
     @GetMapping(path = "/manufacturers/{manufacturerId}")
     private ResponseEntity<?> getManufacturerById(@PathVariable Long manufacturerId) {
         try {
@@ -39,6 +49,12 @@ public class ManufacturerController {
         }
     }
 
+    /**
+     * GET Request for List of Cars by Manufacturer
+     * @param manufacturerName name of Manufacturer
+     * @return List of Cars with Manufacturer matching name
+     */
+    // http://localhost:8080/api/manufacturers/1/cars
     @GetMapping(path = "/manufacturers/{manufacturerName}/cars")
     public ResponseEntity<?> getAllCarsByManufacturerName(@PathVariable String manufacturerName) {
         Manufacturer manufacturer = manufacturerService.getManufacturerByName(manufacturerName);
