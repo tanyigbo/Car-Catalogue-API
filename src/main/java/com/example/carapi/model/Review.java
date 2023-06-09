@@ -39,8 +39,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(Long id, String title, String reviewText, String reviewerName,Car car) {
-        this.id = id;
+    public Review(String title, String reviewText, String reviewerName,Car car) {
         this.title = title;
         this.reviewText = reviewText;
         this.reviewerName = reviewerName;

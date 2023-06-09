@@ -24,8 +24,7 @@ public class ReviewImage {
     public ReviewImage() {
     }
 
-    public ReviewImage(Long id, String imageAddress, Review review) {
-        this.id = id;
+    public ReviewImage(String imageAddress, Review review) {
         this.imageAddress = imageAddress;
         this.review = review;
     }
