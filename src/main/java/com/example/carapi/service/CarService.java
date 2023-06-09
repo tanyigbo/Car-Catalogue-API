@@ -19,10 +19,19 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
+    /**
+     * Calls Car Repository to find all Cars
+     * @return List of all Cars
+     */
     public List<Car> getAllCars(){
         return carRepository.findAll();
     }
 
+    /**
+     * Calls Cars Repository to find Car with provided id
+     * @param carId id of requested Car
+     * @return Car with matching id
+     */
     public Car getCarById(Long carId){
         Optional<Car> car = carRepository.findById(carId);
         if(car.isPresent()){
@@ -31,6 +40,11 @@ public class CarService {
         throw new InformationNotFoundException("Car with ID " + carId + " was not found.");
     }
 
+    /**
+     * Calls Car Repository to find Car with provided model name
+     * @param modelName name of requested Car
+     * @return Car with matching model name
+     */
     public Car getCarByModel(String modelName){
         return carRepository.getCarByModel(modelName);
     }

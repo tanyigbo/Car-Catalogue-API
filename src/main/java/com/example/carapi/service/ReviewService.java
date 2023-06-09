@@ -27,6 +27,11 @@ public class ReviewService {
         this.reviewImageRepository = reviewImageRepository;
     }
 
+    /**
+     * Calls Review Repository to find Review by id
+     * @param reviewId id of requested Review
+     * @return Review with matching id
+     */
     public Review getReviewById(Long reviewId) {
         Optional<Review> review = reviewRepository.findById(reviewId);
         if (review.isPresent()) {
@@ -35,6 +40,12 @@ public class ReviewService {
         throw new InformationNotFoundException("Review with ID " + reviewId + " was not found.");
     }
 
+    /**
+     * Calls Review Repository to add Review to Car
+     * @param carId id of requested Car
+     * @param reviewObj Review data
+     * @return Newly added Review
+     */
     public Review createReview(Long carId, Review reviewObj) {
         try {
             Car car = carService.getCarById(carId);
@@ -45,6 +56,12 @@ public class ReviewService {
         }
     }
 
+    /**
+     * Calls ReviewImageRepository to add Review Image to Review
+     * @param reviewId id of requested review
+     * @param reviewImage Review Image data
+     * @return Newly added Review Image
+     */
     public Review addImageToReview(Long reviewId, ReviewImage reviewImage){
         try {
             Review review = getReviewById(reviewId);
