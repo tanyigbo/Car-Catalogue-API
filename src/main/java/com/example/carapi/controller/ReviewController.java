@@ -24,6 +24,16 @@ public class ReviewController {
         this.responseController = responseController;
     }
 
+    @GetMapping(path = "reviews/{reviewId}")
+    public ResponseEntity<?> getReviewById(@PathVariable Long reviewId){
+        try {
+            Review review = reviewService.getReviewById(reviewId);
+            return responseController.successfulRequestResponse(review,HttpStatus.OK);
+        }catch (Exception e){
+            return responseController.failureRequestResponse(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping(path = "/reviews/{reviewId}/images")
     public ResponseEntity<?> getAllImagesOfReview(@PathVariable Long reviewId) {
         try {
