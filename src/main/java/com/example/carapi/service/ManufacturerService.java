@@ -19,10 +19,19 @@ public class ManufacturerService {
         this.manufacturerRepository = manufacturerRepository;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Manufacturer> getAllManufacturers() {
         return manufacturerRepository.findAll();
     }
 
+    /**
+     *
+     * @param manufacturerId
+     * @return
+     */
     public Manufacturer getManufacturerById(Long manufacturerId) {
         Optional<Manufacturer> manufacturer = manufacturerRepository.findById(manufacturerId);
         if (manufacturer.isPresent()) {
@@ -31,6 +40,11 @@ public class ManufacturerService {
         throw new InformationNotFoundException("Manufacturer with ID " + manufacturerId + " was not found.");
     }
 
+    /**
+     *
+     * @param manufacturerName
+     * @return
+     */
     public Manufacturer getManufacturerByName(String manufacturerName){
         return manufacturerRepository.getManufacturerByName(manufacturerName);
     }
