@@ -52,13 +52,14 @@ public class DataLoader implements CommandLineRunner {
         if (carRepository.count() == 0) {
             List<Manufacturer> manufacturers = manufacturerRepository.findAll();
             List<Car> cars = Arrays.asList(
-                    new Car(1L, "e-tron GT", manufacturers.get(0)),
-                    new Car(2L, "Q4 e-tron", manufacturers.get(0)),
-                    new Car(3L, "i4 M50", manufacturers.get(1)),
-                    new Car(4L, "iX M60", manufacturers.get(1)),
-                    new Car(5L, "Model S", manufacturers.get(3)),
-                    new Car(6L, "Model 3", manufacturers.get(3)),
-                    new Car(7L, "Ioniq 5", manufacturers.get(2))
+                    // range capacity cargo length width height drive
+                    new Car("e-tron GT", 232, 93.4, 12.9, 196.5, 77.2, 55.5, "AWD", manufacturers.get(0)),
+                    new Car("Q4 e-tron", 252, 82, 18.4, 180.6, 73.4, 64.3, "RWD", manufacturers.get(0)),
+                    new Car("i4 M50", 240, 83.9, 16.6, 188.3, 72.9, 57, "AWD", manufacturers.get(1)),
+                    new Car("iX M60",324 ,111.5 ,17.7 ,195 ,77.4 ,66.7 ,"AWD" , manufacturers.get(1)),
+                    new Car("Model S",315 ,100 , 31.6, 196,77.3 ,56.9 , "AWD", manufacturers.get(3)),
+                    new Car("Model 3", 315, 75, 15, 184.8,76.1 , 56.8, "AWD", manufacturers.get(3)),
+                    new Car("Ioniq 5",256 , 72.6, 18.8, 182.5,74.4 ,63.2 ,"AWD" , manufacturers.get(2))
             );
             carRepository.saveAll(cars);
         }

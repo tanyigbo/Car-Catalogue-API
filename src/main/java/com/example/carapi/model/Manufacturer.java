@@ -1,8 +1,5 @@
 package com.example.carapi.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -21,9 +18,8 @@ public class Manufacturer {
     @Column(nullable = false)
     private String country;
 
-//    @JsonIgnore
     @Column
-    @OneToMany(mappedBy = "manufacture")
+    @OneToMany(mappedBy = "manufacturer")
     private List<Car> carList;
 
     public Manufacturer() {

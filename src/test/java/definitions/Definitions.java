@@ -102,7 +102,6 @@ public class Definitions {
     public void aListOfAllCarsIsReturned() {
         List<Map<String, String>> cars = response.jsonPath().get("data");
         Assert.assertTrue(cars.size() > 0);
-        System.out.println(cars);
     }
 
     @When("User requests a car by id")
