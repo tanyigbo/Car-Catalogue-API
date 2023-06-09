@@ -28,7 +28,7 @@ public class CarController {
     @GetMapping(path = "/cars")
     public ResponseEntity<?> getAllCars() {
         List<Car> cars = carService.getAllCars();
-        return responseController.successfulRequestResponse(cars,HttpStatus.FOUND);
+        return responseController.successfulRequestResponse(cars,HttpStatus.OK);
     }
 
     @GetMapping(path = "/cars/{carId}")

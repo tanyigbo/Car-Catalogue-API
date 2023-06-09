@@ -95,7 +95,7 @@ public class Definitions {
     @When("User requests a list of all cars")
     public void userRequestsAListOfAllCars() {
         response = request.get(BASE_URL + port + "/api/cars");
-        Assert.assertEquals(302, response.getStatusCode());
+        Assert.assertEquals(200, response.getStatusCode());
     }
 
     @Then("A list of all cars is returned")
